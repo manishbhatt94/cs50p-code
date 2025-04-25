@@ -1,5 +1,5 @@
-from artists import get_artists
-from artwork import get_artworks
+from museum.artists import get_artists
+from museum.artwork import get_artworks
 
 
 def main():
