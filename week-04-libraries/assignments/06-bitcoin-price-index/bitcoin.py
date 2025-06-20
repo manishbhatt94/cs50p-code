@@ -1,11 +1,10 @@
+import os
 import sys
 
-# import os
 import requests
+from dotenv import load_dotenv
 
-# from dotenv import load_dotenv
-
-# load_dotenv()
+load_dotenv()
 
 
 def main():
@@ -29,10 +28,10 @@ def read_btc_input():
 
 
 def get_usd_from_btc(amount_btc):
-    # api_key = os.getenv("COINCAP_API_KEY")
-    # if api_key is None:
-    #     sys.exit("Provide COINCAP_API_KEY environment variable.")
-    api_key = "dd69f8d07a7552e013a0e9c67ca38358c62711471cc7dda5fb34df1f790ebaa0"
+    api_key = os.getenv("COINCAP_API_KEY")
+    if api_key is None:
+        sys.exit("Provide COINCAP_API_KEY environment variable.")
+    # api_key = "your-api-key"
 
     try:
         response = requests.get(
@@ -40,7 +39,8 @@ def get_usd_from_btc(amount_btc):
         )
         response.raise_for_status()
         coincap_response_json = response.json()
-    except (requests.HTTPError, requests.JSONDecodeError):
+    except (requests.HTTPError, requests.JSONDecodeError) as err:
+        print(f"Error occurred: {err}")
         sys.exit("Failed to get BTC rate in USD")
 
     amount_usd = amount_btc * float(coincap_response_json["data"]["priceUsd"])
