@@ -6,13 +6,21 @@ using @property and @house.setter (or @<name-of-attribute>.setter) decorators
 
 class Student:
     def __init__(self, name, house):
-        if not name:
-            raise ValueError("Missing name")
         self.name = name
         self.house = house
 
     def __str__(self):
         return f"{self.name} from {self.house}"
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        if not name:
+            raise ValueError("Missing name")
+        self._name = name
 
     @property
     def house(self):
