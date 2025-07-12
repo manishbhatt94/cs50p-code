@@ -6,8 +6,16 @@ using @property and @house.setter (or @<name-of-attribute>.setter) decorators
 
 class Student:
     def __init__(self, name, house):
+        # setter is called even for the `self.name = name` assignment in __init__ as well
         self.name = name
+        # setter is called even for the `self.house = house` assignment in __init__ as well
         self.house = house
+        # ...
+        # But assignment using `self._name = name` which uses the underlying
+        # attribute (note the leading underscore) and not the property (or the @property) `name`
+        # Such assignment does not call the setter, & is so (in our example) not validated.
+        # ...
+        # Similarly for `self._house = house`
 
     def __str__(self):
         return f"{self.name} from {self.house}"

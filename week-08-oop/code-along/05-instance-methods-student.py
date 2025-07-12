@@ -17,6 +17,9 @@ class Student:
     def __str__(self):
         return f"{self.name} from {self.house}"
 
+    # instance method 'charm()'
+    # Python instance methods always get passed 'self' as the 1st param
+    # that refers to the current object on which this method is being called
     def charm(self):
         match self.patronus:
             case "Stag":
